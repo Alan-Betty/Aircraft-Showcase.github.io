@@ -1,0 +1,126 @@
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-bold');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+
+
+.banner{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .slider{
+    position: absolute;
+    max-width: 200px;
+    max-height: 250px;
+    width: 200px; /* Ensure fixed width */
+    height: 250px; /* Ensure fixed height */
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 30s linear infinite;
+    
+    z-index: 2;
+}
+
+@keyframes autoRun {
+    from{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item{
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg  ))
+        translateZ(550px);
+}
+
+/* !! Distance of each item
+!!    360 deg / quantity
+!!    360/10 = 36 */
+
+/* !!RotateY of item
+   !!(postion - 1) * (360deg/ qunatity)  */
+
+.banner .slider .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner .content{
+    position: absolute;
+    top: 65%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h1 {
+    position: relative;
+    font-family: 'ICA Rubrik';
+    font-size: 8em;
+    line-height: 1em;
+    color: #25283b;
+    z-index: 2;
+    mix-blend-mode: screen; /* makes dark text blend with light background */
+    pointer-events: none;
+}
+
+.banner .content h1::before {
+    content: attr(data-content);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    color: transparent;
+    -webkit-text-stroke: 2px #d2d2d2; /* Adjust stroke width and color as needed */
+    pointer-events: none;
+}
+
+.banner .content h1::after {
+    content: attr(data-content);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    background: url('images/Su57 2.png') no-repeat;
+    background-size: cover;
+    background-position: top left; /* Adjust this value as needed */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    pointer-events: none;
+}
+
+.banner .content .model {
+    background-image: url('images/Su57 2.png');
+    width: 100%;
+    height: 75vh;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1; /* Make sure it's behind the h1 */
+}
